@@ -24,8 +24,8 @@ pipeline {
 			}
 	stage('create & publish image') {
               steps {
- 	      withCredentials([usernameColonPassword(credentialsId: 'dockerhub-7404298959', usernameVariable: 'user', passwordVariable: 'pass')]) {		      
-		      sh 'docker login -u $(user) -p $(pass)'
+ 	      withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'mycreds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+		      sh 'docker login -u $USERNAME -p $PASSWORD'
 		      sh 'docker build -t 7404298959/webapp:v1.0 .'
 		      sh 'docker images'
 		      sh 'docker push 7404298959/webapp:v1.0'
