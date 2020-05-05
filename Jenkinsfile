@@ -18,13 +18,19 @@ pipeline {
         stage('build') {
               steps {
 		      sh 'mvn clean package -DskipTests=true'
+		      sh 'cp -rf target/SampleApp-1.0-SNAPSHOT.war ../'
+		      sh 'ls -lrt'
                     }
 			}
 	stage('create & publish image') {
               steps {
+ 	      withCredentials([usernameColonPassword(credentialsId: 'dockerhub-7404298959', usernameVariable: 'user' passwordVariable: 'pass')]) {		      
+		      sh 'docker login -u $(user) -p $(pass)'
 		      sh 'docker build -t 7404298959/webapp:v1.0 .'
 		      sh 'docker images'
-                    }
-			}
-		}	
+		      sh 'docker push 7404298959/webapp:v1.0'
+                      }
+		}
+	  }
+    }	
 }
