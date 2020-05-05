@@ -6,7 +6,7 @@ pipeline {
 	}
     environment {
         branch = 'master'
-        scmUrl = 'https://github.com/iamrameshtk/SampleApp.git'
+        scmUrl = 'https://https://github.com/Purushothamanan/javaApp.git'
         serverPort = '8080'
     }
     stages {
