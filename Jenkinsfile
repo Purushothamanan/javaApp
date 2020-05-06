@@ -22,7 +22,7 @@ pipeline {
 		      sh 'ls -lrt'
                     }
 			}
-	stage('create -- publish image') {
+	stage('create -&- publish image') {
               steps {
  	      withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'dockerhub-7404298959', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
 		      sh 'docker login -u $USERNAME -p $PASSWORD'
